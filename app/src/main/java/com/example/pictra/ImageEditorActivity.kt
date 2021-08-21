@@ -35,6 +35,8 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import com.theartofdev.edmodo.cropper.CropImage
+import com.theartofdev.edmodo.cropper.CropImageView
 import java.io.ByteArrayOutputStream
 import java.text.SimpleDateFormat
 import java.util.*
@@ -48,6 +50,7 @@ class ImageEditorActivity : AppCompatActivity(), UploadBitmapListener {
     private lateinit var colorButton: Button
     private lateinit var undoButton: Button
     private lateinit var addText: Button
+    private lateinit var cropButton: Button
 
 
     private lateinit var textInputLauncher: ActivityResultLauncher<Intent>
@@ -62,6 +65,7 @@ class ImageEditorActivity : AppCompatActivity(), UploadBitmapListener {
         colorButton = findViewById(R.id.colorButton)
         undoButton = findViewById(R.id.undoButton)
         addText = findViewById(R.id.addText)
+        cropButton = findViewById(R.id.crop)
 
         pictraImageContainerView.setDebugMode(true)
         listeners()
@@ -101,6 +105,19 @@ class ImageEditorActivity : AppCompatActivity(), UploadBitmapListener {
 
         addText.setOnClickListener {
             textInputLauncher.launch(Intent(this, TextInputActivity::class.java))
+        }
+
+
+        cropButton.setOnClickListener {
+            CropImage.activity()
+                .setGuidelines(CropImageView.Guidelines.ON)
+                .start(this);
+
+            CropImage.activity(intent.data)
+                .start(this);
+
+            CropImage.activity()
+                .start(this);
         }
     }
 
