@@ -51,7 +51,7 @@
     </LinearLayout>
 
 
-    <tashariko.com.writetoscreenapp.CustomCanvasForDraw
+    <com.example.pictra.CustomCanvasForDraw
         android:id="@+id/customCanvas"
         android:layout_below="@id/topButtonView"
         android:layout_above="@id/resetButton"

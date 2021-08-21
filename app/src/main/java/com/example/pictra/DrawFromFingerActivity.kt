@@ -23,6 +23,8 @@ class DrawFromFingerActivity : AppCompatActivity() {
         undoButton = findViewById(R.id.undoButton)
         customCanvasForDraw.setDebugMode(true)
         listeners()
+
+
     }
 
     private fun listeners() {
