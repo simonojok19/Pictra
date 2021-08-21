@@ -2,12 +2,20 @@ package com.example.pictra
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.util.AttributeSet
 import kotlin.jvm.JvmOverloads
 import android.widget.RelativeLayout
 import com.example.pictra.PictraImageView.GetCoordinateCallback
 import android.widget.TextView
 import android.view.LayoutInflater
+import androidx.core.content.ContentProviderCompat.requireContext
+import java.io.File
+import android.os.Environment
+import androidx.core.graphics.drawable.toBitmap
+import java.io.ByteArrayOutputStream
+import java.io.FileOutputStream
+
 
 class PictraImageContainerView @JvmOverloads constructor(
     context: Context?,
@@ -53,6 +61,12 @@ class PictraImageContainerView @JvmOverloads constructor(
         pictraImageView.increaseWidth(decrease)
     }
 
+    fun saveImageToFile(file: File) {
+        pictraImageView.buildDrawingCache()
+        val bitmap = pictraImageView.drawingCache
+        saveBitmap(bitmap, file)
+    }
+
     fun resetView() {
         pictraImageView.resetView()
         moveText.text = "0.0"
@@ -78,5 +92,15 @@ class PictraImageContainerView @JvmOverloads constructor(
 
     init {
         initView()
+    }
+
+    fun saveBitmap(bmp: Bitmap, file: File): File {
+        val bytes = ByteArrayOutputStream()
+        bmp.compress(Bitmap.CompressFormat.JPEG, 60, bytes)
+        file.createNewFile()
+        val fo = FileOutputStream(file)
+        fo.write(bytes.toByteArray())
+        fo.close()
+        return file
     }
 }

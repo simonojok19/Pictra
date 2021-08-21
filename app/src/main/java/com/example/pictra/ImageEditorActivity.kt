@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory
 import android.graphics.Bitmap
 import android.graphics.Matrix
 import android.net.Uri
+import java.io.File
 import java.io.FileNotFoundException
 import java.io.InputStream
 import java.lang.Exception
@@ -22,6 +23,7 @@ class ImageEditorActivity : AppCompatActivity() {
     private lateinit var sizePlusButton: Button
     private lateinit var colorButton: Button
     private lateinit var undoButton: Button
+    private lateinit var saveButton: Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_image_editor)
@@ -31,6 +33,7 @@ class ImageEditorActivity : AppCompatActivity() {
         sizePlusButton = findViewById(R.id.sizePlusButton)
         colorButton = findViewById(R.id.colorButton)
         undoButton = findViewById(R.id.undoButton)
+        saveButton = findViewById(R.id.saveButton)
         pictraImageContainerView.setDebugMode(true)
         listeners()
 
@@ -56,6 +59,10 @@ class ImageEditorActivity : AppCompatActivity() {
             dialog.show()
         }
         undoButton.setOnClickListener { pictraImageContainerView.undoView() }
+        saveButton.setOnClickListener {
+            val file = getOutputDirectory()
+            pictraImageContainerView.saveImageToFile(file)
+        }
     }
 
     private fun resetView() {
@@ -81,5 +88,13 @@ class ImageEditorActivity : AppCompatActivity() {
     fun Bitmap.rotate(degrees: Float): Bitmap {
         val matrix = Matrix().apply { postRotate(degrees) }
         return Bitmap.createBitmap(this, 0, 0, width, height, matrix, true)
+    }
+
+    private fun getOutputDirectory(): File {
+        val mediaDir = externalMediaDirs.firstOrNull()?.let {
+            File(it, resources.getString(R.string.app_name)).apply { mkdirs() }
+        }
+        return if (mediaDir != null && mediaDir.exists())
+            mediaDir else filesDir
     }
 }

@@ -11,6 +11,7 @@ import android.util.Log
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.ContextCompat
 import android.view.MotionEvent
+import java.io.File
 import java.util.ArrayList
 
 class PictraImageView(context: Context?, attrs: AttributeSet?) : AppCompatImageView(
@@ -155,4 +156,5 @@ class PictraImageView(context: Context?, attrs: AttributeSet?) : AppCompatImageV
     init {
         init()
     }
+
 }
