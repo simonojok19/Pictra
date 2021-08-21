@@ -5,8 +5,8 @@ import android.os.Bundle
 import android.widget.Button
 import com.turkialkhateeb.materialcolorpicker.ColorChooserDialog
 
-class DrawFromFingerActivity : AppCompatActivity() {
-    private lateinit var customCanvasForDraw: CustomCanvasForDraw
+class ImageEditorActivity : AppCompatActivity() {
+    private lateinit var pictraImageContainerView: PictraImageContainerView
     private lateinit var resetButton: Button
     private lateinit var sizeMinusButton: Button
     private lateinit var sizePlusButton: Button
@@ -15,13 +15,13 @@ class DrawFromFingerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_draw_from_finger)
-        customCanvasForDraw = findViewById(R.id.customCanvas)
+        pictraImageContainerView = findViewById(R.id.customCanvas)
         resetButton = findViewById(R.id.resetButton)
         sizeMinusButton = findViewById(R.id.sizeMinusButton)
         sizePlusButton = findViewById(R.id.sizePlusButton)
         colorButton = findViewById(R.id.colorButton)
         undoButton = findViewById(R.id.undoButton)
-        customCanvasForDraw.setDebugMode(true)
+        pictraImageContainerView.setDebugMode(true)
         listeners()
 
 
@@ -29,21 +29,21 @@ class DrawFromFingerActivity : AppCompatActivity() {
 
     private fun listeners() {
         resetButton.setOnClickListener { resetView() }
-        sizeMinusButton.setOnClickListener { customCanvasForDraw.increaseWidth(true) }
-        sizePlusButton.setOnClickListener { customCanvasForDraw.increaseWidth(false) }
+        sizeMinusButton.setOnClickListener { pictraImageContainerView.increaseWidth(true) }
+        sizePlusButton.setOnClickListener { pictraImageContainerView.increaseWidth(false) }
         colorButton.setOnClickListener {
-            val dialog = ColorChooserDialog(this@DrawFromFingerActivity)
+            val dialog = ColorChooserDialog(this@ImageEditorActivity)
             dialog.setTitle("Select Color")
             dialog.setColorListener { _, color -> //do whatever you want to with the values
-                customCanvasForDraw.changeColor(color)
+                pictraImageContainerView.changeColor(color)
             }
             //customize the dialog however you want
             dialog.show()
         }
-        undoButton.setOnClickListener { customCanvasForDraw.undoView() }
+        undoButton.setOnClickListener { pictraImageContainerView.undoView() }
     }
 
     private fun resetView() {
-        customCanvasForDraw.resetView()
+        pictraImageContainerView.resetView()
     }
 }

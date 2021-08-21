@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".DrawFromFingerActivity"/>
+        <activity android:name=".ImageEditorActivity"/>
     </application>
 
 </manifest>

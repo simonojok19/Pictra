@@ -51,7 +51,7 @@
     </LinearLayout>
 
 
-    <com.example.pictra.CustomCanvasForDraw
+    <com.example.pictra.PictraImageContainerView
         android:id="@+id/customCanvas"
         android:layout_below="@id/topButtonView"
         android:layout_above="@id/resetButton"

@@ -4,23 +4,23 @@ import android.content.Context
 import android.util.AttributeSet
 import kotlin.jvm.JvmOverloads
 import android.widget.RelativeLayout
-import com.example.pictra.CustomDrawView.GetCoordinateCallback
+import com.example.pictra.PictraImageView.GetCoordinateCallback
 import android.widget.TextView
 import android.view.LayoutInflater
 
-class CustomCanvasForDraw @JvmOverloads constructor(
+class PictraImageContainerView @JvmOverloads constructor(
     context: Context?,
     attrs: AttributeSet,
     defStyleAttr: Int = 0
 ) : RelativeLayout(context, attrs, defStyleAttr), GetCoordinateCallback {
-    private lateinit var customDrawView: CustomDrawView
+    private lateinit var pictraImageView: PictraImageView
     private lateinit var startText: TextView
     private lateinit var moveText: TextView
     private lateinit var endText: TextView
     private var isDebugEnabled = true
     private fun initView() {
         LayoutInflater.from(context).inflate(R.layout.custom_canvas_for_draw, this, true)
-        customDrawView = findViewById(R.id.mainView)
+        pictraImageView = findViewById(R.id.mainView)
         startText = findViewById(R.id.startPointText)
         moveText = findViewById(R.id.movingPointText)
         endText = findViewById(R.id.endPointText)
@@ -33,7 +33,7 @@ class CustomCanvasForDraw @JvmOverloads constructor(
             moveText.visibility = GONE
             endText.visibility = GONE
         }
-        customDrawView.setThisCallback(this)
+        pictraImageView.setThisCallback(this)
     }
 
     fun setDebugMode(isDebugEnabled: Boolean) {
@@ -41,19 +41,19 @@ class CustomCanvasForDraw @JvmOverloads constructor(
     }
 
     fun changeColor(color: Int) {
-        customDrawView.setDrawColor(color)
+        pictraImageView.setDrawColor(color)
     }
 
     fun undoView() {
-        customDrawView.undoPath()
+        pictraImageView.undoPath()
     }
 
     fun increaseWidth(decrease: Boolean) {
-        customDrawView.increaseWidth(decrease)
+        pictraImageView.increaseWidth(decrease)
     }
 
     fun resetView() {
-        customDrawView.resetView()
+        pictraImageView.resetView()
         moveText.text = "0.0"
         startText.text = "0.0"
         endText.text = "0.0"

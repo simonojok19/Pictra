@@ -8,14 +8,11 @@ import android.graphics.Path
 import android.util.AttributeSet
 import android.util.Log
 import androidx.appcompat.widget.AppCompatImageView
-import com.example.pictra.CustomDrawView.GetCoordinateCallback
-import com.example.pictra.CustomDrawView
 import androidx.core.content.ContextCompat
-import com.example.pictra.R
 import android.view.MotionEvent
 import java.util.ArrayList
 
-class CustomDrawView(context: Context?, attrs: AttributeSet?) : AppCompatImageView(
+class PictraImageView(context: Context?, attrs: AttributeSet?) : AppCompatImageView(
     context!!, attrs
 ) {
     private var state = 0

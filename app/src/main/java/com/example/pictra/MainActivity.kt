@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity() {
 
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
                     val savedUri = Uri.fromFile(photoFile)
-                    val intent = Intent(baseContext, DrawFromFingerActivity::class.java)
+                    val intent = Intent(baseContext, ImageEditorActivity::class.java)
                     intent.data = savedUri
                     startActivity(intent)
                 }
