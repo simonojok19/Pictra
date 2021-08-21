@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginHorizontal="5dp">
+    android:layout_marginHorizontal="5dp"
+    android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/topButtonView"
@@ -49,7 +50,8 @@
     <com.example.pictra.PictraImageContainerView
         android:id="@+id/customCanvas"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:layout_above="@id/button_button_container"
         android:layout_below="@id/topButtonView" />
 
@@ -87,4 +89,21 @@
             android:textSize="13sp" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-</RelativeLayout>
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="5dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BarBrightness"/>
+        <androidx.appcompat.widget.AppCompatSeekBar
+            android:layout_width="0dp"
+            android:max="20"
+            android:layout_weight="1"
+            android:layout_height="5dp"/>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.appcompat.widget.LinearLayoutCompat>
