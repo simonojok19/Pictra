@@ -1,6 +1,7 @@
 package com.example.pictra
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.util.AttributeSet
 import kotlin.jvm.JvmOverloads
 import android.widget.RelativeLayout
@@ -69,6 +70,10 @@ class PictraImageContainerView @JvmOverloads constructor(
 
     override fun end(x: Float, y: Float) {
         endText.text = String.format("%.02f", x) + ", " + String.format("%.02f", y)
+    }
+
+    fun setBitmap (bitmap: Bitmap) {
+        pictraImageView.setImageBitmap(bitmap)
     }
 
     init {

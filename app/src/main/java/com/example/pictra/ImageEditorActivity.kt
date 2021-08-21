@@ -1,9 +1,18 @@
 package com.example.pictra
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import com.turkialkhateeb.materialcolorpicker.ColorChooserDialog
+import android.graphics.BitmapFactory
+
+import android.graphics.Bitmap
+import android.net.Uri
+import java.io.FileNotFoundException
+import java.io.InputStream
+import java.lang.Exception
+
 
 class ImageEditorActivity : AppCompatActivity() {
     private lateinit var pictraImageContainerView: PictraImageContainerView
@@ -24,6 +33,9 @@ class ImageEditorActivity : AppCompatActivity() {
         pictraImageContainerView.setDebugMode(true)
         listeners()
 
+        val url = intent.data;
+        val bitmap = decodeUriToBitmap(this, url!!)
+        pictraImageContainerView.setBitmap(bitmap)
 
     }
 
@@ -45,5 +57,21 @@ class ImageEditorActivity : AppCompatActivity() {
 
     private fun resetView() {
         pictraImageContainerView.resetView()
+    }
+
+    fun decodeUriToBitmap(mContext: Context, sendUri: Uri): Bitmap {
+        var getBitmap: Bitmap? = null
+        try {
+            val image_stream: InputStream
+            try {
+                image_stream = mContext.getContentResolver().openInputStream(sendUri)!!
+                getBitmap = BitmapFactory.decodeStream(image_stream)
+            } catch (e: FileNotFoundException) {
+                e.printStackTrace()
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return getBitmap!!
     }
 }
