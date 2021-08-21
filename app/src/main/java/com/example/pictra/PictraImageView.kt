@@ -162,7 +162,7 @@ class PictraImageView(context: Context?, attrs: AttributeSet?) : AppCompatImageV
     fun drawUserText(text: String) {
         val paint = Paint()
         paint.color = Color.BLACK
-        paint.textSize = 40f
+        paint.textSize = 30f
         textPaintList.add(TextPaint(
             paint = paint,
             text = text,
@@ -208,9 +208,6 @@ class PictraImageView(context: Context?, attrs: AttributeSet?) : AppCompatImageV
         val bitmap = copy(Bitmap.Config.ARGB_8888,true)
         val paint = Paint()
 
-        // brightness -200..200, 0 is default
-        // contrast 0..2, 1 is default
-        // you may tweak the range
         val matrix = ColorMatrix(
             floatArrayOf(
                 contrast, 0f, 0f, 0f, brightness,

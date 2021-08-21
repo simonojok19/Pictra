@@ -106,7 +106,7 @@
             android:layout_width="0dp"
             android:max="20"
             android:layout_weight="1"
-            android:progress="2"
+            android:progress="10"
             android:layout_height="10dp"/>
     </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -127,7 +127,7 @@
             android:layout_width="0dp"
             android:max="20"
             android:layout_weight="1"
-            android:progress="2"
+            android:progress="10"
             android:layout_height="10dp"/>
     </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.appcompat.widget.LinearLayoutCompat>
