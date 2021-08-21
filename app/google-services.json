@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "758742729299",
+    "project_id": "clearquotes-cbf75",
+    "storage_bucket": "clearquotes-cbf75.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:758742729299:android:4f2488adc8e860432f7ca6",
+        "android_client_info": {
+          "package_name": "com.example.pictra"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "758742729299-tet0s8fbjl0coe6paffoogm1msif8rp2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAzxKuWWZ2MwWuLEtwFZ4uPeN7OPsEvpk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "758742729299-tet0s8fbjl0coe6paffoogm1msif8rp2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

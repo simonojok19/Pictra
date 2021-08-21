@@ -37,6 +37,7 @@ class PictraImageContainerView @JvmOverloads constructor(
     private lateinit var moveText: TextView
     private lateinit var endText: TextView
     private var isDebugEnabled = true
+    private lateinit var uploadBitmapListener: UploadBitmapListener
     private fun initView() {
         LayoutInflater.from(context).inflate(R.layout.pictra_image_container_view, this, true)
         pictraImageView = findViewById(R.id.mainView)
@@ -74,7 +75,7 @@ class PictraImageContainerView @JvmOverloads constructor(
     fun saveImageToFile(file: File) {
         pictraImageView.buildDrawingCache()
         val bitmap = pictraImageView.drawingCache
-        saveMediaToStorage(bitmap)
+        uploadBitmapListener.uploadImage(bitmap)
     }
 
     fun resetView() {
@@ -98,6 +99,10 @@ class PictraImageContainerView @JvmOverloads constructor(
 
     fun setBitmap (bitmap: Bitmap) {
         pictraImageView.setImageBitmap(bitmap)
+    }
+
+    fun setOnUploadListener(imageEditorActivity: UploadBitmapListener) {
+        uploadBitmapListener = imageEditorActivity
     }
 
     init {

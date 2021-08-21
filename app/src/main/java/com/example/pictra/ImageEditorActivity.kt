@@ -1,5 +1,6 @@
 package com.example.pictra
 
+import android.R.attr
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -14,9 +15,23 @@ import java.io.File
 import java.io.FileNotFoundException
 import java.io.InputStream
 import java.lang.Exception
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.UploadTask
+
+import com.google.android.gms.tasks.OnSuccessListener
+
+import androidx.annotation.NonNull
+
+import com.google.android.gms.tasks.OnFailureListener
+
+import com.google.firebase.storage.StorageReference
+
+import android.R.attr.bitmap
+import android.util.Log
+import java.io.ByteArrayOutputStream
 
 
-class ImageEditorActivity : AppCompatActivity() {
+class ImageEditorActivity : AppCompatActivity(), UploadBitmapListener {
     private lateinit var pictraImageContainerView: PictraImageContainerView
     private lateinit var resetButton: Button
     private lateinit var sizeMinusButton: Button
@@ -42,6 +57,7 @@ class ImageEditorActivity : AppCompatActivity() {
             val bitmap = decodeUriToBitmap(this, url)
             pictraImageContainerView.setBitmap(bitmap.rotate(90f))
         }
+        pictraImageContainerView.setOnUploadListener(this)
 
     }
 
@@ -96,5 +112,28 @@ class ImageEditorActivity : AppCompatActivity() {
         }
         return if (mediaDir != null && mediaDir.exists())
             mediaDir else filesDir
+    }
+
+    override fun uploadImage(bitmap: Bitmap) {
+        val baos = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+        val data: ByteArray = baos.toByteArray()
+
+        val storage = FirebaseStorage.getInstance()
+        val storageRef = storage.getReferenceFromUrl("gs://clearquotes-cbf75.appspot.com")
+        val imagesRef = storageRef.child("images/name_of_your_image.jpg")
+
+        val uploadTask = imagesRef.putBytes(data)
+        uploadTask.addOnFailureListener {
+            // Handle unsuccessful uploads
+        }.addOnSuccessListener { taskSnapshot ->
+            // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
+            Log.d(TAG, "uploadImage: ${taskSnapshot.storage.downloadUrl}")
+            // Do what you want
+        }
+    }
+
+    companion object {
+        private const val TAG = "ImageEditorActivity"
     }
 }
