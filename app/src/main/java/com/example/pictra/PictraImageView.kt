@@ -21,10 +21,14 @@ class PictraImageView(context: Context?, attrs: AttributeSet?) : AppCompatImageV
     private val paintPenList = ArrayList<Paint>()
     private lateinit var latestPath: Path
     private lateinit var latestPaint: Paint
+    private lateinit var textPaint: Paint
     private val pathPenList = ArrayList<Path>()
     private lateinit var callbackForCoordinate: GetCoordinateCallback
     private var lineWidth = 15
     private var currentColor = 0
+    private  var xPosition: Float = 0f
+    private  var yPosition: Float = 0f
+    private var userText = ""
     private fun init() {
         DEFAULT_COLOR = ContextCompat.getColor(context, R.color.colorAccent)
         currentColor = DEFAULT_COLOR
@@ -32,6 +36,7 @@ class PictraImageView(context: Context?, attrs: AttributeSet?) : AppCompatImageV
     }
 
     private fun initPaintNPen(color: Int) {
+        textPaint = getNewPaintPen(color)
         latestPaint = getNewPaintPen(color)
         latestPath = newPathPen
         paintPenList.add(latestPaint)
@@ -61,6 +66,8 @@ class PictraImageView(context: Context?, attrs: AttributeSet?) : AppCompatImageV
     override fun onTouchEvent(event: MotionEvent): Boolean {
         val x = event.x
         val y = event.y
+        xPosition = x
+        yPosition = y
         Log.i("CO-ordinate", event.x.toString() + " : " + event.y)
         if (event.action == MotionEvent.ACTION_DOWN) {
             callbackForCoordinate.start(x, y)
@@ -100,6 +107,7 @@ class PictraImageView(context: Context?, attrs: AttributeSet?) : AppCompatImageV
         for (i in paintPenList.indices) {
             canvas.drawPath(pathPenList[i], paintPenList[i])
         }
+        canvas.drawText(userText, xPosition, yPosition, textPaint)
     }
 
     fun increaseWidth(decrease: Boolean) {
@@ -141,6 +149,10 @@ class PictraImageView(context: Context?, attrs: AttributeSet?) : AppCompatImageV
         invalidate()
     }
 
+    fun drawUserText(text: String) {
+        userText = text
+    }
+
     interface GetCoordinateCallback {
         fun moving(x: Float, y: Float)
         fun start(x: Float, y: Float)
@@ -155,6 +167,10 @@ class PictraImageView(context: Context?, attrs: AttributeSet?) : AppCompatImageV
 
     init {
         init()
+    }
+
+    interface OnDrawTextListener {
+        fun drawText(text: String)
     }
 
 }

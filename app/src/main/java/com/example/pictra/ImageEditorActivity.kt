@@ -76,7 +76,8 @@ class ImageEditorActivity : AppCompatActivity(), UploadBitmapListener {
         textInputLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             val data = it.data
             if (data != null) {
-                Log.d(TAG, "onCreate: ${data.getStringExtra(TextInputActivity.TEXT_ENTERED)}")
+                val text = data.getStringExtra(TextInputActivity.TEXT_ENTERED)
+                pictraImageContainerView.drawUserText(text ?: "")
             }
 
         }
