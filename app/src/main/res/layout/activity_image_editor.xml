@@ -123,6 +123,7 @@
             android:textSize="15sp"
             android:text="Contrast"/>
         <androidx.appcompat.widget.AppCompatSeekBar
+            android:id="@+id/contrast_sleek"
             android:layout_width="0dp"
             android:max="20"
             android:layout_weight="1"

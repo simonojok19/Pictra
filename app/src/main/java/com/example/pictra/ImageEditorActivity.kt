@@ -58,6 +58,7 @@ class ImageEditorActivity : AppCompatActivity(), UploadBitmapListener {
     private lateinit var cropButton: Button
     private lateinit var cropImageLauncher: ActivityResultLauncher<Intent>
     private lateinit var brightnessSleek: AppCompatSeekBar
+    private lateinit var contrastSleek: AppCompatSeekBar
     private lateinit var bitmap: Bitmap
 
 
@@ -75,6 +76,7 @@ class ImageEditorActivity : AppCompatActivity(), UploadBitmapListener {
         addText = findViewById(R.id.addText)
         cropButton = findViewById(R.id.crop)
         brightnessSleek = findViewById(R.id.brightness_sleek)
+        contrastSleek = findViewById(R.id.contrast_sleek)
 
 
         pictraImageContainerView.setDebugMode(true)
@@ -144,11 +146,34 @@ class ImageEditorActivity : AppCompatActivity(), UploadBitmapListener {
                 fromUser: Boolean
             ) {
                 val brightness = progress.toFloat()-200
+                val contrast = contrastSleek.progress.toFloat() /10f
 
                 pictraImageContainerView
                     .updateImageContrastBrightness(
                         brightness = brightness,
-                        contrast = brightness
+                        contrast = contrast
+                    )
+            }
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+            }
+        })
+
+        contrastSleek.setOnSeekBarChangeListener(object:
+            SeekBar.OnSeekBarChangeListener{
+            override fun onProgressChanged(
+                seekBar: SeekBar?,
+                progress: Int,
+                fromUser: Boolean
+            ) {
+                val contrast = progress.toFloat() / 10f
+                val brightness = brightnessSleek.progress.toFloat() - 200
+                pictraImageContainerView
+                    .updateImageContrastBrightness(
+                        brightness = brightness,
+                        contrast = contrast
                     )
             }
             override fun onStartTrackingTouch(seekBar: SeekBar?) {
