@@ -8,6 +8,7 @@ import com.turkialkhateeb.materialcolorpicker.ColorChooserDialog
 import android.graphics.BitmapFactory
 
 import android.graphics.Bitmap
+import android.graphics.Matrix
 import android.net.Uri
 import java.io.FileNotFoundException
 import java.io.InputStream
@@ -35,7 +36,7 @@ class ImageEditorActivity : AppCompatActivity() {
 
         val url = intent.data;
         val bitmap = decodeUriToBitmap(this, url!!)
-        pictraImageContainerView.setBitmap(bitmap)
+        pictraImageContainerView.setBitmap(bitmap.rotate(-90f))
 
     }
 
@@ -59,12 +60,12 @@ class ImageEditorActivity : AppCompatActivity() {
         pictraImageContainerView.resetView()
     }
 
-    fun decodeUriToBitmap(mContext: Context, sendUri: Uri): Bitmap {
+    private fun decodeUriToBitmap(mContext: Context, sendUri: Uri): Bitmap {
         var getBitmap: Bitmap? = null
         try {
             val image_stream: InputStream
             try {
-                image_stream = mContext.getContentResolver().openInputStream(sendUri)!!
+                image_stream = mContext.contentResolver.openInputStream(sendUri)!!
                 getBitmap = BitmapFactory.decodeStream(image_stream)
             } catch (e: FileNotFoundException) {
                 e.printStackTrace()
@@ -73,5 +74,10 @@ class ImageEditorActivity : AppCompatActivity() {
             e.printStackTrace()
         }
         return getBitmap!!
+    }
+
+    fun Bitmap.rotate(degrees: Float): Bitmap {
+        val matrix = Matrix().apply { postRotate(degrees) }
+        return Bitmap.createBitmap(this, 0, 0, width, height, matrix, true)
     }
 }
