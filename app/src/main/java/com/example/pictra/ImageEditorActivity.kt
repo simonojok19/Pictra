@@ -171,7 +171,7 @@ class ImageEditorActivity : AppCompatActivity(), UploadBitmapListener {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.image_edit_menu)
+        menuInflater.inflate(R.menu.image_edit_menu,menu)
         return true
     }
 
