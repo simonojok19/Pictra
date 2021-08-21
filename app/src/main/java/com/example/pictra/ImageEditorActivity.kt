@@ -37,6 +37,7 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import com.theartofdev.edmodo.cropper.CropImage
+import com.theartofdev.edmodo.cropper.CropImageActivity
 import com.theartofdev.edmodo.cropper.CropImageView
 import java.io.ByteArrayOutputStream
 import java.text.SimpleDateFormat
@@ -52,6 +53,7 @@ class ImageEditorActivity : AppCompatActivity(), UploadBitmapListener {
     private lateinit var undoButton: Button
     private lateinit var addText: Button
     private lateinit var cropButton: Button
+    private lateinit var cropImageLauncher: ActivityResultLauncher<Intent>
 
 
     private lateinit var textInputLauncher: ActivityResultLauncher<Intent>
@@ -87,6 +89,15 @@ class ImageEditorActivity : AppCompatActivity(), UploadBitmapListener {
 
         }
 
+        cropImageLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            val data = it.data
+            if (data != null) {
+                val uri = data.data!!
+                val bitmap = decodeUriToBitmap(this, uri)
+                pictraImageContainerView.setBitmap(bitmap)
+            }
+        }
+
     }
 
     private fun listeners() {
@@ -110,15 +121,9 @@ class ImageEditorActivity : AppCompatActivity(), UploadBitmapListener {
 
 
         cropButton.setOnClickListener {
-            CropImage.activity()
-                .setGuidelines(CropImageView.Guidelines.ON)
-                .start(this);
-
-            CropImage.activity(intent.data)
-                .start(this);
-
-            CropImage.activity()
-                .start(this);
+            val i  = Intent(this, CropImageActivity::class.java)
+            i.data = intent.data
+            cropImageLauncher.launch(i)
         }
     }
 
