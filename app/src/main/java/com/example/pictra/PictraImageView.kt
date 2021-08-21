@@ -161,7 +161,7 @@ class PictraImageView(context: Context?, attrs: AttributeSet?) : AppCompatImageV
 
     fun drawUserText(text: String) {
         val paint = Paint()
-        paint.color = Color.BLACK
+        paint.color = currentColor
         paint.textSize = 30f
         textPaintList.add(TextPaint(
             paint = paint,
