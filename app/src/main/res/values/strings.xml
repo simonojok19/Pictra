@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Pictra</string>
+    <string name="type_here">Type Here</string>
+    <string name="done">Done</string>
 </resources>

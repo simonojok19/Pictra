@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="10dp">
 
     <EditText
+        android:id="@+id/text_input"
+        android:hint="@string/type_here"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:importantForAutofill="no"
+        android:inputType="text" />
 
     <Button
+        android:id="@+id/add_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Done"/>
+        android:text="@string/done"/>
 </androidx.appcompat.widget.LinearLayoutCompat>
