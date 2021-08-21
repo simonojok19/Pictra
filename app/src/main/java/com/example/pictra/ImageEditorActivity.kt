@@ -33,9 +33,12 @@ import android.content.Intent
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.SeekBar
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.widget.AppCompatSeekBar
+import com.google.firebase.storage.internal.Sleeper
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageActivity
 import com.theartofdev.edmodo.cropper.CropImageView
@@ -45,7 +48,7 @@ import java.util.*
 
 
 class ImageEditorActivity : AppCompatActivity(), UploadBitmapListener {
-    private lateinit var pictraImageContainerView: PictraImageContainerView
+    lateinit var pictraImageContainerView: PictraImageContainerView
     private lateinit var resetButton: Button
     private lateinit var sizeMinusButton: Button
     private lateinit var sizePlusButton: Button
@@ -54,6 +57,8 @@ class ImageEditorActivity : AppCompatActivity(), UploadBitmapListener {
     private lateinit var addText: Button
     private lateinit var cropButton: Button
     private lateinit var cropImageLauncher: ActivityResultLauncher<Intent>
+    private lateinit var brightnessSleek: AppCompatSeekBar
+    private lateinit var bitmap: Bitmap
 
 
     private lateinit var textInputLauncher: ActivityResultLauncher<Intent>
@@ -69,13 +74,15 @@ class ImageEditorActivity : AppCompatActivity(), UploadBitmapListener {
         undoButton = findViewById(R.id.undoButton)
         addText = findViewById(R.id.addText)
         cropButton = findViewById(R.id.crop)
+        brightnessSleek = findViewById(R.id.brightness_sleek)
+
 
         pictraImageContainerView.setDebugMode(true)
         listeners()
 
         val url = intent.data;
         if (url != null) {
-            val bitmap = decodeUriToBitmap(this, url)
+            bitmap = decodeUriToBitmap(this, url)
             pictraImageContainerView.setBitmap(bitmap.rotate(90f))
         }
         pictraImageContainerView.setOnUploadListener(this)
@@ -128,6 +135,28 @@ class ImageEditorActivity : AppCompatActivity(), UploadBitmapListener {
                 )
                 .start(this);
         }
+
+        brightnessSleek.setOnSeekBarChangeListener(object:
+            SeekBar.OnSeekBarChangeListener{
+            override fun onProgressChanged(
+                seekBar: SeekBar?,
+                progress: Int,
+                fromUser: Boolean
+            ) {
+                val brightness = progress.toFloat()-200
+
+                pictraImageContainerView
+                    .updateImageContrastBrightness(
+                        brightness = brightness,
+                        contrast = brightness
+                    )
+            }
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+            }
+        })
     }
 
     private fun resetView() {
@@ -225,6 +254,7 @@ class ImageEditorActivity : AppCompatActivity(), UploadBitmapListener {
             }
         }
     }
+
 
     companion object {
         private const val TAG = "ImageEditorActivity"

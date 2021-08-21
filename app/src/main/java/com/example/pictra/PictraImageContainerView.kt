@@ -113,4 +113,8 @@ class PictraImageContainerView @JvmOverloads constructor(
         initView()
     }
 
+    fun updateImageContrastBrightness(brightness: Float, contrast: Float) {
+        pictraImageView.updateImageContrastBrightness(brightness, contrast)
+    }
+
 }

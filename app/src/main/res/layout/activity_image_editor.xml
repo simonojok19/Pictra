@@ -102,6 +102,7 @@
             android:textSize="15sp"
             android:text="Brightness"/>
         <androidx.appcompat.widget.AppCompatSeekBar
+            android:id="@+id/brightness_sleek"
             android:layout_width="0dp"
             android:max="20"
             android:layout_weight="1"
