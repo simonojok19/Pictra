@@ -20,7 +20,7 @@ class PictraImageContainerView @JvmOverloads constructor(
     private lateinit var endText: TextView
     private var isDebugEnabled = true
     private fun initView() {
-        LayoutInflater.from(context).inflate(R.layout.custom_canvas_for_draw, this, true)
+        LayoutInflater.from(context).inflate(R.layout.pictra_image_container_view, this, true)
         pictraImageView = findViewById(R.id.mainView)
         startText = findViewById(R.id.startPointText)
         moveText = findViewById(R.id.movingPointText)

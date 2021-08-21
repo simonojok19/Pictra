@@ -24,7 +24,7 @@ class ImageEditorActivity : AppCompatActivity() {
     private lateinit var undoButton: Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_draw_from_finger)
+        setContentView(R.layout.activity_image_editor)
         pictraImageContainerView = findViewById(R.id.customCanvas)
         resetButton = findViewById(R.id.resetButton)
         sizeMinusButton = findViewById(R.id.sizeMinusButton)
@@ -36,7 +36,7 @@ class ImageEditorActivity : AppCompatActivity() {
 
         val url = intent.data;
         val bitmap = decodeUriToBitmap(this, url!!)
-        pictraImageContainerView.setBitmap(bitmap.rotate(-90f))
+        pictraImageContainerView.setBitmap(bitmap.rotate(90f))
 
     }
 
