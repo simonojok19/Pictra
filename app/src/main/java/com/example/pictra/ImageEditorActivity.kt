@@ -139,7 +139,7 @@ class ImageEditorActivity : AppCompatActivity(), UploadBitmapListener {
 
     override fun uploadImage(bitmap: Bitmap) {
         val progressDoalog = ProgressDialog(this)
-        progressDoalog.setMessage("Uploading Image....");
+        progressDoalog.setMessage("Uploading Image Please await ....");
         progressDoalog.setTitle("Upload Image");
         progressDoalog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDoalog.show();
