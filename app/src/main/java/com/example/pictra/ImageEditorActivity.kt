@@ -27,6 +27,7 @@ import com.google.android.gms.tasks.OnFailureListener
 import com.google.firebase.storage.StorageReference
 
 import android.R.attr.bitmap
+import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Intent
 import android.util.Log
@@ -198,6 +199,23 @@ class ImageEditorActivity : AppCompatActivity(), UploadBitmapListener {
             pictraImageContainerView.saveImageToFile(file)
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            val result = CropImage.getActivityResult(data)
+            if (resultCode == RESULT_OK) {
+                val resultUri = result.uri
+                if (result != null) {
+                    val bitmap = decodeUriToBitmap(this, resultUri)
+                    pictraImageContainerView.setBitmap(bitmap.rotate(90f))
+                }
+
+            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                val error = result.error
+            }
+        }
     }
 
     companion object {
