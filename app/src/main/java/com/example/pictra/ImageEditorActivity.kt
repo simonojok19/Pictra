@@ -123,6 +123,9 @@ class ImageEditorActivity : AppCompatActivity(), UploadBitmapListener {
         cropButton.setOnClickListener {
             CropImage.activity(intent.data!!)
                 .setGuidelines(CropImageView.Guidelines.ON)
+                .setScaleType(
+                    CropImageView.ScaleType.CENTER_INSIDE
+                )
                 .start(this);
         }
     }

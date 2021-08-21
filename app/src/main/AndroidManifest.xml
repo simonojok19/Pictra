@@ -37,8 +37,7 @@
             android:name=".TextInputActivity"
             android:theme="@style/Theme.MaterialComponents.DayNight.Dialog" />
         <activity
-            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
-            android:theme="@style/Base.Theme.AppCompat" />
+            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"/>
     </application>
 
 </manifest>
