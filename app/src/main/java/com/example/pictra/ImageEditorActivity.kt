@@ -28,8 +28,11 @@ import com.google.firebase.storage.StorageReference
 
 import android.R.attr.bitmap
 import android.app.ProgressDialog
+import android.content.Intent
 import android.util.Log
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import java.io.ByteArrayOutputStream
 import java.text.SimpleDateFormat
 import java.util.*
@@ -43,6 +46,11 @@ class ImageEditorActivity : AppCompatActivity(), UploadBitmapListener {
     private lateinit var colorButton: Button
     private lateinit var undoButton: Button
     private lateinit var saveButton: Button
+    private lateinit var addText: Button
+
+
+    private lateinit var textInputLauncher: ActivityResultLauncher<Intent>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_image_editor)
@@ -53,6 +61,8 @@ class ImageEditorActivity : AppCompatActivity(), UploadBitmapListener {
         colorButton = findViewById(R.id.colorButton)
         undoButton = findViewById(R.id.undoButton)
         saveButton = findViewById(R.id.saveButton)
+        addText = findViewById(R.id.addText)
+
         pictraImageContainerView.setDebugMode(true)
         listeners()
 
@@ -62,6 +72,14 @@ class ImageEditorActivity : AppCompatActivity(), UploadBitmapListener {
             pictraImageContainerView.setBitmap(bitmap.rotate(90f))
         }
         pictraImageContainerView.setOnUploadListener(this)
+
+        textInputLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            val data = it.data
+            if (data != null) {
+                Log.d(TAG, "onCreate: ${data.getStringExtra(TextInputActivity.TEXT_ENTERED)}")
+            }
+
+        }
 
     }
 
@@ -82,6 +100,10 @@ class ImageEditorActivity : AppCompatActivity(), UploadBitmapListener {
         saveButton.setOnClickListener {
             val file = getOutputDirectory()
             pictraImageContainerView.saveImageToFile(file)
+        }
+
+        addText.setOnClickListener {
+
         }
     }
 

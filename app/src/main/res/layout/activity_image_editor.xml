@@ -47,43 +47,42 @@
 
     <com.example.pictra.PictraImageContainerView
         android:id="@+id/customCanvas"
-        android:layout_below="@id/topButtonView"
-        android:layout_above="@id/button_button_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_above="@id/button_button_container"
+        android:layout_below="@id/topButtonView" />
 
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/button_button_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        >
+        android:layout_alignParentBottom="true">
 
         <Button
             android:id="@+id/resetButton"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="match_parent"
-            android:textSize="18sp"
-            android:text="reset"/>
+            android:layout_weight="1"
+            android:text="reset"
+            android:textSize="18sp" />
 
         <Button
-            android:layout_marginHorizontal="5dp"
             android:id="@+id/addText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="5dp"
             android:layout_weight="1"
-            android:textSize="18sp"
-            android:text="add text"/>
+            android:text="add text"
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/saveButton"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="match_parent"
-            android:textSize="18sp"
-            android:text="Upload"/>
+            android:layout_weight="1"
+            android:text="Upload"
+            android:textSize="18sp" />
 
 
     </androidx.appcompat.widget.LinearLayoutCompat>
