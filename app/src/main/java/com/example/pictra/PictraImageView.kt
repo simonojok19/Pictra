@@ -2,10 +2,7 @@ package com.example.pictra
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.graphics.Paint
-import android.graphics.Path
+import android.graphics.*
 import android.util.AttributeSet
 import android.util.Log
 import androidx.appcompat.widget.AppCompatImageView
@@ -19,6 +16,7 @@ class PictraImageView(context: Context?, attrs: AttributeSet?) : AppCompatImageV
 ) {
     private var state = 0
     private val paintPenList = ArrayList<Paint>()
+    private val textPaintList = ArrayList<TextPaint>()
     private lateinit var latestPath: Path
     private lateinit var latestPaint: Paint
     private lateinit var textPaint: Paint
@@ -29,6 +27,7 @@ class PictraImageView(context: Context?, attrs: AttributeSet?) : AppCompatImageV
     private  var xPosition: Float = 0f
     private  var yPosition: Float = 0f
     private var userText = ""
+    val paint = Paint()
     private fun init() {
         DEFAULT_COLOR = ContextCompat.getColor(context, R.color.colorAccent)
         currentColor = DEFAULT_COLOR
@@ -97,7 +96,9 @@ class PictraImageView(context: Context?, attrs: AttributeSet?) : AppCompatImageV
         latestPath.lineTo(x, y)
     }
 
-    private fun endPath(x: Float, y: Float) {}
+    private fun endPath(x: Float, y: Float) {
+
+    }
     fun setDrawColor(color: Int) {
         currentColor = color
     }
@@ -107,7 +108,11 @@ class PictraImageView(context: Context?, attrs: AttributeSet?) : AppCompatImageV
         for (i in paintPenList.indices) {
             canvas.drawPath(pathPenList[i], paintPenList[i])
         }
-        canvas.drawText(userText, xPosition, yPosition, textPaint)
+
+        for (paint in textPaintList) {
+            canvas.drawText(paint.text, paint.xPoint, paint.yPoint, paint.paint)
+        }
+
     }
 
     fun increaseWidth(decrease: Boolean) {
@@ -150,8 +155,24 @@ class PictraImageView(context: Context?, attrs: AttributeSet?) : AppCompatImageV
     }
 
     fun drawUserText(text: String) {
-        userText = text
+        val paint = Paint()
+        paint.color = Color.BLACK
+        paint.textSize = 40f
+        textPaintList.add(TextPaint(
+            paint = paint,
+            text = text,
+            xPoint = xPosition,
+            yPoint = yPosition
+        ))
     }
+
+    data class TextPaint(
+        val paint: Paint,
+        val text: String,
+        val xPoint: Float,
+        val yPoint: Float
+
+    )
 
     interface GetCoordinateCallback {
         fun moving(x: Float, y: Float)
@@ -168,9 +189,4 @@ class PictraImageView(context: Context?, attrs: AttributeSet?) : AppCompatImageV
     init {
         init()
     }
-
-    interface OnDrawTextListener {
-        fun drawText(text: String)
-    }
-
 }
