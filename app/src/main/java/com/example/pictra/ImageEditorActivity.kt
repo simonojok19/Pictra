@@ -29,6 +29,8 @@ import com.google.firebase.storage.StorageReference
 import android.R.attr.bitmap
 import android.util.Log
 import java.io.ByteArrayOutputStream
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class ImageEditorActivity : AppCompatActivity(), UploadBitmapListener {
@@ -121,7 +123,10 @@ class ImageEditorActivity : AppCompatActivity(), UploadBitmapListener {
 
         val storage = FirebaseStorage.getInstance()
         val storageRef = storage.getReferenceFromUrl("gs://clearquotes-cbf75.appspot.com")
-        val imagesRef = storageRef.child("images/name_of_your_image.jpg")
+        val fileName = SimpleDateFormat(
+            "yyyy-MM-dd-HH-mm-ss-SSS", Locale.US
+        ).format(System.currentTimeMillis()) + ".jpg"
+        val imagesRef = storageRef.child("images/${fileName}")
 
         val uploadTask = imagesRef.putBytes(data)
         uploadTask.addOnFailureListener {
