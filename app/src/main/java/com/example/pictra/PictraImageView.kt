@@ -22,12 +22,10 @@ class PictraImageView(context: Context?, attrs: AttributeSet?) : AppCompatImageV
     private lateinit var textPaint: Paint
     private val pathPenList = ArrayList<Path>()
     private lateinit var callbackForCoordinate: GetCoordinateCallback
-    private var lineWidth = 15
+    private var lineWidth = 3
     private var currentColor = 0
     private  var xPosition: Float = 0f
     private  var yPosition: Float = 0f
-    private var userText = ""
-    val paint = Paint()
     private fun init() {
         DEFAULT_COLOR = ContextCompat.getColor(context, R.color.colorAccent)
         currentColor = DEFAULT_COLOR
@@ -135,7 +133,7 @@ class PictraImageView(context: Context?, attrs: AttributeSet?) : AppCompatImageV
         latestPaint.reset()
         pathPenList.clear()
         paintPenList.clear()
-        lineWidth = 20
+        lineWidth = 5
         initPaintNPen(currentColor)
         textPaintList.clear()
         invalidate()
@@ -149,9 +147,14 @@ class PictraImageView(context: Context?, attrs: AttributeSet?) : AppCompatImageV
             pathPenList.removeAt(pathPenList.size - 1)
             currentColor = latestPaint.color
             lineWidth = latestPaint.strokeWidth.toInt()
-            textPaintList.removeAt(textPaintList.size - 1)
         } else {
             resetView()
+        }
+
+        if (textPaintList.size > 1) {
+            textPaintList.removeAt(textPaintList.size - 1)
+        } else {
+            textPaintList.clear()
         }
         invalidate()
     }
