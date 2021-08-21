@@ -43,14 +43,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content" />
 
-        <Button
-            android:id="@+id/crop"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Crop"
-            android:textSize="13sp" />
-
     </LinearLayout>
 
 
@@ -86,11 +78,11 @@
             android:textSize="13sp" />
 
         <Button
-            android:id="@+id/saveButton"
+            android:id="@+id/crop"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Upload"
+            android:text="Crop"
             android:layout_marginEnd="5dp"
             android:textSize="13sp" />
     </androidx.appcompat.widget.LinearLayoutCompat>

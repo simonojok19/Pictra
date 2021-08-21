@@ -30,6 +30,8 @@ import android.R.attr.bitmap
 import android.app.ProgressDialog
 import android.content.Intent
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -45,7 +47,6 @@ class ImageEditorActivity : AppCompatActivity(), UploadBitmapListener {
     private lateinit var sizePlusButton: Button
     private lateinit var colorButton: Button
     private lateinit var undoButton: Button
-    private lateinit var saveButton: Button
     private lateinit var addText: Button
 
 
@@ -60,7 +61,6 @@ class ImageEditorActivity : AppCompatActivity(), UploadBitmapListener {
         sizePlusButton = findViewById(R.id.sizePlusButton)
         colorButton = findViewById(R.id.colorButton)
         undoButton = findViewById(R.id.undoButton)
-        saveButton = findViewById(R.id.saveButton)
         addText = findViewById(R.id.addText)
 
         pictraImageContainerView.setDebugMode(true)
@@ -98,10 +98,6 @@ class ImageEditorActivity : AppCompatActivity(), UploadBitmapListener {
             dialog.show()
         }
         undoButton.setOnClickListener { pictraImageContainerView.undoView() }
-        saveButton.setOnClickListener {
-            val file = getOutputDirectory()
-            pictraImageContainerView.saveImageToFile(file)
-        }
 
         addText.setOnClickListener {
             textInputLauncher.launch(Intent(this, TextInputActivity::class.java))
@@ -172,6 +168,19 @@ class ImageEditorActivity : AppCompatActivity(), UploadBitmapListener {
             finish()
             // Do what you want
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.image_edit_menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.upload) {
+            val file = getOutputDirectory()
+            pictraImageContainerView.saveImageToFile(file)
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     companion object {
