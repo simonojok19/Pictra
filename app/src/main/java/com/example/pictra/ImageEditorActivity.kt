@@ -209,7 +209,7 @@ class ImageEditorActivity : AppCompatActivity(), UploadBitmapListener {
                 val resultUri = result.uri
                 if (result != null) {
                     val bitmap = decodeUriToBitmap(this, resultUri)
-                    pictraImageContainerView.setBitmap(bitmap.rotate(90f))
+                    pictraImageContainerView.setBitmap(bitmap)
                 }
 
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
