@@ -27,7 +27,9 @@ import com.google.android.gms.tasks.OnFailureListener
 import com.google.firebase.storage.StorageReference
 
 import android.R.attr.bitmap
+import android.app.ProgressDialog
 import android.util.Log
+import android.widget.Toast
 import java.io.ByteArrayOutputStream
 import java.text.SimpleDateFormat
 import java.util.*
@@ -117,6 +119,11 @@ class ImageEditorActivity : AppCompatActivity(), UploadBitmapListener {
     }
 
     override fun uploadImage(bitmap: Bitmap) {
+        val progressDoalog = ProgressDialog(this)
+        progressDoalog.setMessage("Uploading Image....");
+        progressDoalog.setTitle("Upload Image");
+        progressDoalog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDoalog.show();
         val baos = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
         val data: ByteArray = baos.toByteArray()
@@ -129,11 +136,17 @@ class ImageEditorActivity : AppCompatActivity(), UploadBitmapListener {
         val imagesRef = storageRef.child("images/${fileName}")
 
         val uploadTask = imagesRef.putBytes(data)
+
         uploadTask.addOnFailureListener {
+            progressDoalog.hide()
+            Toast.makeText(this, "Error Occurred Uploading Image", Toast.LENGTH_SHORT).show()
             // Handle unsuccessful uploads
         }.addOnSuccessListener { taskSnapshot ->
             // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
             Log.d(TAG, "uploadImage: ${taskSnapshot.storage.downloadUrl}")
+            progressDoalog.hide()
+            Toast.makeText(this, "Image Uploaded Successfully", Toast.LENGTH_SHORT).show()
+            finish()
             // Do what you want
         }
     }
