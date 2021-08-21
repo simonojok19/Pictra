@@ -121,9 +121,9 @@ class ImageEditorActivity : AppCompatActivity(), UploadBitmapListener {
 
 
         cropButton.setOnClickListener {
-            val i  = Intent(this, CropImageActivity::class.java)
-            i.data = intent.data
-            cropImageLauncher.launch(i)
+            CropImage.activity(intent.data!!)
+                .setGuidelines(CropImageView.Guidelines.ON)
+                .start(this);
         }
     }
 

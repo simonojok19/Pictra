@@ -11,9 +11,9 @@ class ImageCropperActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_image_cropper)
 
-        cropImageView = findViewById(R.id.cropImageView)
+//        cropImageView = findViewById(R.id.cropImageView)
 
-        cropImageView.setImageUriAsync(intent.data);
+//        cropImageView.setImageUriAsync(intent.data);
 
     }
 
