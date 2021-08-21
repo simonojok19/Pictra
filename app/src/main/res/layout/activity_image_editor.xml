@@ -18,7 +18,7 @@
             android:text="A-" />
 
         <Button
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="5dp"
             android:id="@+id/sizePlusButton"
             android:text="A+"
             android:layout_weight="1"
@@ -27,7 +27,7 @@
 
 
         <Button
-            android:layout_marginHorizontal="10dp"
+            android:layout_marginHorizontal="5dp"
             android:id="@+id/colorButton"
             android:text="Color"
             android:layout_weight="1"
@@ -64,12 +64,12 @@
             android:id="@+id/resetButton"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:textSize="18sp"
             android:text="reset"/>
 
         <Button
-            android:layout_marginHorizontal="10dp"
+            android:layout_marginHorizontal="5dp"
             android:id="@+id/addText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -81,7 +81,7 @@
             android:id="@+id/saveButton"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:textSize="18sp"
             android:text="save"/>
 

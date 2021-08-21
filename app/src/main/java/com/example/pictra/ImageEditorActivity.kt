@@ -35,8 +35,10 @@ class ImageEditorActivity : AppCompatActivity() {
         listeners()
 
         val url = intent.data;
-        val bitmap = decodeUriToBitmap(this, url!!)
-        pictraImageContainerView.setBitmap(bitmap.rotate(90f))
+        if (url != null) {
+            val bitmap = decodeUriToBitmap(this, url)
+            pictraImageContainerView.setBitmap(bitmap.rotate(90f))
+        }
 
     }
 
