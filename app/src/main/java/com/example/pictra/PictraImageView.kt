@@ -137,6 +137,7 @@ class PictraImageView(context: Context?, attrs: AttributeSet?) : AppCompatImageV
         paintPenList.clear()
         lineWidth = 20
         initPaintNPen(currentColor)
+        textPaintList.clear()
         invalidate()
     }
 
@@ -148,6 +149,7 @@ class PictraImageView(context: Context?, attrs: AttributeSet?) : AppCompatImageV
             pathPenList.removeAt(pathPenList.size - 1)
             currentColor = latestPaint.color
             lineWidth = latestPaint.strokeWidth.toInt()
+            textPaintList.removeAt(textPaintList.size - 1)
         } else {
             resetView()
         }
