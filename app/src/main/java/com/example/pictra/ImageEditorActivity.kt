@@ -103,7 +103,7 @@ class ImageEditorActivity : AppCompatActivity(), UploadBitmapListener {
         }
 
         addText.setOnClickListener {
-
+            textInputLauncher.launch(Intent(this, TextInputActivity::class.java))
         }
     }
 
