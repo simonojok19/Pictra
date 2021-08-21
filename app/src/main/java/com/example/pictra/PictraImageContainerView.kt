@@ -17,6 +17,7 @@ import androidx.core.content.ContentProviderCompat.requireContext
 import java.io.File
 import android.os.Environment
 import android.provider.MediaStore
+import android.widget.Toast
 import androidx.core.graphics.drawable.toBitmap
 import java.io.ByteArrayOutputStream
 import java.io.FileOutputStream
@@ -103,9 +104,9 @@ class PictraImageContainerView @JvmOverloads constructor(
         initView()
     }
 
-    fun saveMediaToStorage(bitmap: Bitmap) {
+    private fun saveMediaToStorage(bitmap: Bitmap) {
         //Generating a file name
-        val filename = "pictra_${System.currentTimeMillis()}.jpg"
+        val filename = "pictra_image${System.currentTimeMillis()}.jpg"
 
         //Output stream
         var fos: OutputStream? = null
